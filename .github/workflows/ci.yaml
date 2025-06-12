@@ -1,0 +1,21 @@
+name: Checkout repository and verify Java installation on GitHub actions runner
+
+on: [push, workflow_dispatch]
+
+jobs:
+  checkout_and_verify_java:
+    name: Test workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest Git commit
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+
+      - name: Verify Java installation
+        run: java -version
